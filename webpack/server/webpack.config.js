@@ -1,13 +1,17 @@
 const fs = require('fs');
 const path = require('path');
-const merge = require('webpack-merge');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const common = require('./webpack.common.js');
+const nodeExternals = require('webpack-node-externals');
+const babelOptions = JSON.parse(fs.readFileSync(path.resolve('./.babelrc'), 'utf8'));
 
-const babelOptions = JSON.parse(fs.readFileSync(path.resolve('./.babelrc'), "utf8"));
-
-module.exports = merge(common, {
+module.exports = {
+  target: 'node',
+  node: {
+    __dirname: false,
+    __filename: false
+  },
+  entry: './src/server/index.js',
   module: {
     rules: [
       {
@@ -18,15 +22,20 @@ module.exports = merge(common, {
           options: babelOptions
         }
       }
-    ],
+    ]
   },
   plugins: [
-    // new UglifyJSPlugin(),
+    new UglifyJSPlugin(),
     new CopyWebpackPlugin([
       {
         from: './src/server/public',
         to: './public'
       }
     ])
-  ]
-});
+  ],
+  output: {
+    filename: 'index.js',
+    path: path.resolve('./build')
+  },
+  externals: [nodeExternals()]
+};

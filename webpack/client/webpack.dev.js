@@ -1,11 +1,10 @@
 const fs = require('fs');
+const path = require('path');
 const webpack = require('webpack');
-const merge = require('webpack-merge');
-const common = require('./webpack.common.js');
 
-const babelOptions = JSON.parse(fs.readFileSync('.babelrc', { encoding: 'utf8' }));
+const babelOptions = JSON.parse(fs.readFileSync(path.resolve('./.babelrc'), 'utf8'));
 
-module.exports = merge(common, {
+module.exports = {
   entry: {
     app: [
       'react-hot-loader/patch',
@@ -26,7 +25,7 @@ module.exports = merge(common, {
         ],
         exclude: /node_modules/
       }
-    ],
+    ]
   },
   devtool: 'inline-source-map',
   plugins: [
@@ -35,4 +34,4 @@ module.exports = merge(common, {
       'process.env.NODE_ENV': JSON.stringify('development')
     })
   ]
-});
+};
