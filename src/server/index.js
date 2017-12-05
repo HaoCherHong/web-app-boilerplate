@@ -6,7 +6,7 @@ import api from './api';
 
 const server = express();
 
-if(process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development') {
   const webpack = require('webpack');
   const devMiddleware = require('webpack-dev-middleware');
   const hotMiddleware = require('webpack-hot-middleware');
@@ -16,8 +16,8 @@ if(process.env.NODE_ENV === 'development') {
   const compiler = webpack(clientWebpackConfig);
 
   server.use(devMiddleware(compiler, {
-      noInfo: false,
-      publicPath: '/build/'
+    noInfo: false,
+    publicPath: '/build/'
   }));
 
   server.use(hotMiddleware(compiler));

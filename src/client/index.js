@@ -1,24 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-import App from './App.jsx';
+import App from './App';
+
+const router = React.createElement(Router, null, React.createElement(Route, {
+  path: '/',
+  component: App
+}));
 
 const render = () => {
-  if(process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === 'development') {
     const AppContainer = require('react-hot-loader').AppContainer;
-  
-    ReactDOM.render(
-      React.createElement(AppContainer,null,
-        React.createElement(App)
-      ), document.getElementById('react-root')
-    );
+
+    ReactDOM.render(React.createElement(AppContainer, null, router), document.getElementById('react-root'));
   } else {
-    ReactDOM.render(React.createElement(App), document.getElementById('react-root'));
+    ReactDOM.render(router, document.getElementById('react-root')
+    );
   }
-}
+};
 
 render();
 
-if(module.hot) {
+if (module.hot) {
   module.hot.accept();
 }
