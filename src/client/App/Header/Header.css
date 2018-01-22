@@ -1,0 +1,37 @@
+.header {
+  background: white;
+  width: 100%;
+  text-align: center;
+  padding: 84px 0 48px 0;
+}
+
+.collapsed {
+	position: fixed;
+	top: 0;
+	padding: 0;
+	z-index: 1;
+	height: 60px;
+  text-align: left;
+}
+
+.logo {
+  width: 210px;
+  height: 148px;
+}
+
+.logoCollapsed {
+  width: auto;
+  height: 60px;
+  padding: 16px;
+}
+
+.searchButton {
+  background: white;
+  border-radius: 22.5px;
+  border: 1px solid #898989;
+  color: #898989;
+  font-size: 18px;
+  width: 150px;
+  height: 45px;
+  margin-top: 25px;
+}

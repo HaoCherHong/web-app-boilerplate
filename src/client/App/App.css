@@ -1,0 +1,58 @@
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body {
+  background: #f7f8f8;
+}
+
+button {
+  background: none;
+  border: none;
+  outline: none;
+}
+
+button:disabled {
+  color: rgba(255,255,255,0.5) !important;
+}
+
+select {
+  outline: none;
+  background: url(/images/select_arr@2x.png) no-repeat;
+  background-position: right 5px center;
+  background-size: 17px 10px;
+  border: #c9caca 1px solid;
+  color: #898989;
+  font-size: 16px;
+  height: 37px;
+  border-radius: 8px;
+  padding: 0 10px 0 10px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+}
+
+input {
+  background: transparent;
+  border: #c9caca 1px solid;
+  border-radius: 8px;
+  padding: 0 10px 0 10px;
+  font-size: 18px;
+  height: 37px;
+  /* line-height: 18px; */
+  outline: none;
+}
+
+.checkbox {
+  color: #898989;
+  font-size: 16px;
+  position: relative;
+  margin-top: 10px;
+}

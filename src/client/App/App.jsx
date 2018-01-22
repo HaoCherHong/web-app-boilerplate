@@ -1,6 +1,7 @@
 import React from 'react';
-import { Route, Redirect, Switch } from 'react-router-dom';
+import { Route, Redirect, Switch, withRouter } from 'react-router-dom';
 
+import Header from './Header';
 import FollowedPage from '../pages/FollowedPage';
 import PostsPage from '../pages/PostsPage';
 import PostPage from '../pages/PostPage';
@@ -13,13 +14,25 @@ import FeedbackPage from '../pages/FeedbackPage';
 
 import styles from './App.css';
 
+@withRouter
 export default class App extends React.Component {
+
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+      this.onRouteChanged();
+    }
+  }
+
+  onRouteChanged() {
+    const {history} = this.props;
+    if (history.action === 'PUSH')
+      console.log("ROUTE CHANGED");
+  }
+
   render() {
     return (
       <div>
-        <header>
-          Header
-        </header>
+        <Header/>
         <Switch>
           <Redirect from='/' to='/posts' exact/>
           <Route path='posts'>
