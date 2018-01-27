@@ -1,9 +1,9 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import cx from 'classnames';
+import {connect} from 'react-redux';
 
 import styles from './PostsPage.css';
 
+@connect()
 export default class Header extends React.Component {
   render() {
     return null;
