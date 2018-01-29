@@ -62,13 +62,9 @@ export default class Header extends React.Component {
     return (
       <header className={styles.wrapper}>
         <div
-          className={cx(
-            styles.header,
-            {
-              [styles.expandable]: expandable,
-              [styles.collapsed]: collapsed
-            }
-          )}
+          className={cx(styles.header, {
+            [styles.collapsed]: collapsed
+          })}
           style={{top: headerTop}}>
           {
             title ? (
