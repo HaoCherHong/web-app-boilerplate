@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter, Route} from 'react-router-dom';
+import { renderRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
 import { compose, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
 
-import App from './components/App';
+import routes from './routes';
 
 let store;
 if (process.env.NODE_ENV === 'development') {
@@ -19,12 +20,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const AppCore = React.createElement(Provider, {store},
-  React.createElement(Router, null,
-    React.createElement(Route, {
-      path: '/',
-      component: App
-    })
-  )
+  React.createElement(BrowserRouter, null, renderRoutes(routes))
 );
 
 const render = () => {

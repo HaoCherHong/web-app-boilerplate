@@ -1,5 +1,9 @@
 import React from 'react';
-import { Route, Redirect, Switch, IndexRoute, withRouter } from 'react-router-dom';
+import {Route, Redirect, Switch, withRouter} from 'react-router-dom';
+import {renderRoutes, matchRoutes} from "react-router-config";
+import {trigger} from 'redial';
+
+import routes from '../../routes';
 
 import Header from './Header';
 import FollowedPage from '../pages/FollowedPage';
@@ -16,7 +20,6 @@ import styles from './App.css';
 
 @withRouter
 export default class App extends React.Component {
-
   componentDidUpdate(prevProps) {
     if (this.props.location !== prevProps.location) {
       this.onRouteChanged();
@@ -24,30 +27,21 @@ export default class App extends React.Component {
   }
 
   onRouteChanged() {
-    const {history} = this.props;
-    if (history.action === 'PUSH')
-      console.log("ROUTE CHANGED");
+    const {history, location} = this.props;
+    if (history.action === 'PUSH') {
+      const branch = matchRoutes(routes, location.pathname);
+      branch.forEach(({match, route: {component}}) => {
+        trigger('fetch', component, match);
+      });
+    }
   }
 
   render() {
+    const {route} = this.props;
     return (
       <div>
         <Header/>
-        <PostsPage/>
-        {/* <Switch>
-          <Redirect from='/' to='/posts' exact/>
-          <Route path='posts'>
-            <IndexRoute component={PostsPage}/>
-            <Route path='followed' component={FollowedPage}/>
-            <Route path='new' component={NewPostPage}/>
-            <Route path=':postId' component={PostPage}/>
-          </Route>
-          <Route path='users/:userId/posts' component={UserPage}/>
-          <Route path='settings' component={SettingsPage}/>
-          <Route path='notifications' component={NotificationsPage}/>
-          <Route path='search' component={SearchPge}/>
-          <Route path='feedback' component={FeedbackPage}/>
-        </Switch> */}
+        {renderRoutes(route.routes)}
         <footer className={styles.footer}>
           PUPY © 2015
         </footer>

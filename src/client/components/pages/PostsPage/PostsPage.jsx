@@ -1,5 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {provideHooks} from 'redial';
+
 import relativizeTime from '../../../utils/relativizeTime';
 
 import Gallery from '../../posts/Gallery';
@@ -9,6 +11,11 @@ import styles from './PostsPage.css';
 @connect(state => ({
   posts: state.posts
 }))
+@provideHooks({
+  fetch: locals => {
+    console.log(locals);
+  }
+})
 export default class PostsPage extends React.Component {
   render() {
     const {posts} = this.props;
