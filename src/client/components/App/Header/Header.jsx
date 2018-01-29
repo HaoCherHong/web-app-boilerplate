@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import cx from 'classnames';
 
 import styles from './Header.css';
@@ -7,28 +7,69 @@ import styles from './Header.css';
 import imgLogo from 'images/index_logo@2x.png';
 import imgLogoCollapsed from 'images/com_logo@2x.png';
 
+const MAX_Y_OFFSET = 290;
+const	HEADER_HEIGHT = 62;
+
+const getExpandable = location => (
+  /^\/posts/.test(location.pathname)
+);
+
+const getCollapsed = (collapsed, expandable) => {
+  if (expandable) {
+    if (!collapsed && window.pageYOffset > MAX_Y_OFFSET)
+      collapsed = true;
+    else if (collapsed && window.pageYOffset < MAX_Y_OFFSET)
+      collapsed = false;
+  } else
+    collapsed = true;
+  return collapsed;
+};
+
+@withRouter
 export default class Header extends React.Component {
 
   state = {
-    headerTop: 0
+    headerTop: 0,
+    expandable: false,
+    collapsed: false,
+  }
+
+  lastScrollY = 0;
+  scrollDownDistance = 0;
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll, false);
+    this.lastScrollY = window.pageYOffset;
+    this.scrollDownDistance = 0;
+    this.handleScroll();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  componentDidUpdate(prevProps) {
+    const {location} = this.props;
+    if (location !== prevProps.location) {
+      this.handleRouteChange();
+    }
   }
 
   render() {
-    const { expandable, collapsed, title } = this.props;
-    const { headerTop } = this.state;
+    const { title } = this.props;
+    const { headerTop, expandable, collapsed } = this.state;
 
     return (
-      <header
-        className={cx(
-          styles.header,
-          {
-            [styles.expandable]: expandable,
-            [styles.collapsed]: collapsed
-          }
-        )}
-        style={{top: headerTop}}>
-
-        <div>
+      <header className={styles.wrapper}>
+        <div
+          className={cx(
+            styles.header,
+            {
+              [styles.expandable]: expandable,
+              [styles.collapsed]: collapsed
+            }
+          )}
+          style={{top: headerTop}}>
           {
             title ? (
               <h1>{title}</h1>
@@ -41,7 +82,7 @@ export default class Header extends React.Component {
           {
             !collapsed && (
               <Link to='/search'>
-                <button className={styles.searchButton}>
+                <button className={cx(styles.searchButton, styles.fadeIn)}>
                   <i className='fa fa-search'/> 我要找
                 </button>
               </Link>
@@ -55,11 +96,11 @@ export default class Header extends React.Component {
   }
 
   renderLogo() {
-    const {collapsed} = this.props;
+    const {collapsed} = this.state;
 
     if (collapsed) {
       return (
-        <img className={styles.logoCollapsed} alt='噗比 PUPY Logo' src={imgLogoCollapsed}/>
+        <img className={cx(styles.logoCollapsed, styles.fadeIn)} alt='噗比 PUPY Logo' src={imgLogoCollapsed}/>
       );
     }
     return (
@@ -82,25 +123,26 @@ export default class Header extends React.Component {
   }
 
   renderTopRightButtons() {
-    const {closeButton, collapsed} = this.props;
+    const {closeButton, collapsed} = this.state;
 
     return (
-      <div className='mobile-nav-buttons'>
+      <div className={styles.navigationButtons}>
         {
           closeButton ? (
             <button><i className='fa fa-times'/></button>
           ) : (
             <div>
-              {
-                collapsed && (
-                  <Link to='/search'>
-                    <button key='search' id='btn-nav-search'>
-                      <i className='fa fa-search'/>
-                    </button>
-                  </Link>
-                )
-              }
-              <button key='hamburger'>
+              <Link to='/search'>
+                <button className={
+                  cx(styles.navigationButton, {
+                    [styles.fadeIn]: collapsed,
+                    [styles.fadeOut]: !collapsed,
+                  })
+                }>
+                  <i className='fa fa-search'/>
+                </button>
+              </Link>
+              <button className={styles.navigationButton}>
                 <i className='fa fa-bars'/>
               </button>
             </div>
@@ -108,5 +150,60 @@ export default class Header extends React.Component {
         }
       </div>
     );
+  }
+
+  handleRouteChange() {
+    const {location} = this.props;
+    //Set expandable
+    const expandable = getExpandable(location);
+    if(this.state.expandable != expandable)
+      this.setState({
+        expandable
+      });
+    //Set collapsed
+    const collapsed = getCollapsed(this.state.collapsed, expandable);
+    if(this.state.collapsed != collapsed)
+      this.setState({
+        collapsed
+      });
+  }
+
+  handleScroll = () => {
+    const {location} = this.props;
+
+    //Set expandable
+    const expandable = getExpandable(location);
+    if(this.state.expandable !== expandable)
+      this.setState({
+        expandable
+      });
+
+    //Set collapsed
+    const collapsed = getCollapsed(this.state.collapsed, expandable);
+    if(this.state.collapsed !== collapsed)
+      this.setState({
+        collapsed
+      });
+
+    // Hide / Show header by scrolling
+    if (this.state.collapsed) {
+      if (window.pageYOffset > this.lastScrollY) {
+        //Scrolling down
+        if (this.lastScrollY)
+          this.scrollDownDistance += (window.pageYOffset - this.lastScrollY);
+        if (this.scrollDownDistance > 0) {
+          this.setState({
+            headerTop: Math.max(-HEADER_HEIGHT, this.state.headerTop - (window.pageYOffset - this.lastScrollY))
+          });
+        }
+      } else {
+        //Scrolling up
+        this.setState({
+          headerTop: Math.min(0, Math.max(-HEADER_HEIGHT, parseInt(this.state.headerTop)) + (this.lastScrollY - window.pageYOffset))
+        });
+        this.scrollDownDistance = 0;
+      }
+      this.lastScrollY = window.pageYOffset;
+    }
   }
 }

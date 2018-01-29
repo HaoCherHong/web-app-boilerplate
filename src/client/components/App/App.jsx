@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Redirect, Switch, withRouter } from 'react-router-dom';
+import { Route, Redirect, Switch, IndexRoute, withRouter } from 'react-router-dom';
 
 import Header from './Header';
 import FollowedPage from '../pages/FollowedPage';
@@ -33,10 +33,11 @@ export default class App extends React.Component {
     return (
       <div>
         <Header/>
-        <Switch>
+        <PostsPage/>
+        {/* <Switch>
           <Redirect from='/' to='/posts' exact/>
           <Route path='posts'>
-            <Route path='/' component={PostsPage}/>
+            <IndexRoute component={PostsPage}/>
             <Route path='followed' component={FollowedPage}/>
             <Route path='new' component={NewPostPage}/>
             <Route path=':postId' component={PostPage}/>
@@ -46,9 +47,8 @@ export default class App extends React.Component {
           <Route path='notifications' component={NotificationsPage}/>
           <Route path='search' component={SearchPge}/>
           <Route path='feedback' component={FeedbackPage}/>
-          {/* <Redirect from='/' to='posts/p/1'/> */}
-        </Switch>
-        <footer className='footer'>
+        </Switch> */}
+        <footer className={styles.footer}>
           PUPY © 2015
         </footer>
       </div>

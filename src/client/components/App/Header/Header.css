@@ -1,3 +1,7 @@
+.wrapper {
+  height: 370px;
+}
+
 .header {
   background: white;
   width: 100%;
@@ -34,4 +38,54 @@
   width: 150px;
   height: 45px;
   margin-top: 25px;
+  opacity: 0;
+}
+
+.fadeIn {
+  animation-name: fade-in;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.fadeOut {
+  animation-name: fade-out;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.navigationButtons {
+  position: fixed;
+  top: 0px;
+  right: 5px;
+  text-align: right;
+}
+
+.collapsed .navigationButtons {
+  position: absolute;
+}
+
+.navigationButton {
+  color: #898989;
+  font-size: 20px;
+  width: 40px;
+  height: 60px;
+  padding: 20px 10px 20px 10px;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
