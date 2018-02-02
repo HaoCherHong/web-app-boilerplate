@@ -7,26 +7,29 @@ import {getMonth, getYear} from '../../../utils/convertAge';
 
 import Avatar from '../../Avatar';
 import Gallery from '../../posts/Gallery';
+import PageList from '../../posts/PageList';
 
 import {listPosts} from '../../../actions/posts';
 
 import styles from './PostsPage.css';
 
 @connect(state => ({
-  posts: state.posts
+  posts: state.posts,
+  postsPagination: state.postsPagination
 }))
 @provideHooks({
   fetch: ({dispatch}) => {
-    dispatch(listPosts());
+    dispatch(listPosts(1, true));
   }
 })
 export default class PostsPage extends React.Component {
   render() {
-    const {posts} = this.props;
+    const {posts, postsPagination} = this.props;
 
     return (
       <div className={styles.postsPage}>
         {posts.map(this.renderPost)}
+        <PageList pageCount={postsPagination} currentPage={1}/>
       </div>
     );
   }
