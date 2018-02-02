@@ -4,6 +4,7 @@ import {provideHooks} from 'redial';
 
 import relativizeTime from '../../../utils/relativizeTime';
 
+import Avatar from '../../Avatar';
 import Gallery from '../../posts/Gallery';
 
 import {listPosts} from '../../../actions/posts';
@@ -34,7 +35,7 @@ export default class PostsPage extends React.Component {
       <div key={index} className={styles.post}>
         <header className={styles.header}>
           <div className={styles.headerAvatar}>
-            <img className={styles.avatar}/>
+            <Avatar portrait={post.author.portrait} size={40}/>
           </div>
           <div className={styles.headerName}>
             {post.author.name}
