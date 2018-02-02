@@ -37,7 +37,7 @@ export default class PostsPage extends React.Component {
             <img className={styles.avatar}/>
           </div>
           <div className={styles.headerName}>
-            {post.userName}
+            {post.author.name}
           </div>
           <div className={styles.headerTime}>
             {relativizeTime(post.createdAt)}
