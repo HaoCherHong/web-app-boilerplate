@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {provideHooks} from 'redial';
 
 import relativizeTime from '../../../utils/relativizeTime';
+import {getMonth, getYear} from '../../../utils/convertAge';
 
 import Avatar from '../../Avatar';
 import Gallery from '../../posts/Gallery';
@@ -73,10 +74,12 @@ export default class PostsPage extends React.Component {
   }
 
   renderAge = age => {
+    const year = getYear(age);
+    const month = getMonth(age);
     return (
       <span>
         <i className="fa fa-birthday-cake"/>
-        {(age.year ? age.year + '歲' : '') + (age.month ? age.month + '個月' : '')}
+        {(year ? year + '歲' : '') + (month ? month + '個月' : '')}
       </span>
     );
   }
