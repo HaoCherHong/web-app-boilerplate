@@ -6,14 +6,16 @@ import relativizeTime from '../../../utils/relativizeTime';
 
 import Gallery from '../../posts/Gallery';
 
+import {listPosts} from '../../../actions/posts';
+
 import styles from './PostsPage.css';
 
 @connect(state => ({
   posts: state.posts
 }))
 @provideHooks({
-  fetch: locals => {
-    console.log(locals);
+  fetch: ({dispatch}) => {
+    dispatch(listPosts());
   }
 })
 export default class PostsPage extends React.Component {
