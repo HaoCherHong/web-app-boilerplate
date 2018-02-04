@@ -84,7 +84,7 @@ export default class PostsPage extends React.Component {
             <div className={styles.property}>{this.renderAge(post.age)}</div>
             <div className={styles.property}>{this.renderLocation(post.location)}</div>
             <div className={styles.property}>
-              <i className='fa fa-paw'/>
+              <i className='fas fa-paw'/>
               {post.introduction}
             </div>
           </div>
@@ -95,7 +95,7 @@ export default class PostsPage extends React.Component {
 
   renderGender = gender => {
     const text = gender === 'boy' ? '男生' : '女生';
-    const className = gender === 'boy' ? 'fa fa-male' : 'fa fa-female';
+    const className = gender === 'boy' ? 'fas fa-male' : 'fas fa-female';
     return (
       <span>
         <i className={className}/>
@@ -109,7 +109,7 @@ export default class PostsPage extends React.Component {
     const month = getMonth(age);
     return (
       <span>
-        <i className='fa fa-birthday-cake'/>
+        <i className='fas fa-birthday-cake'/>
         {(year ? year + '歲' : '') + (month ? month + '個月' : '')}
       </span>
     );

@@ -79,7 +79,7 @@ export default class Header extends React.Component {
             !collapsed && (
               <Link to='/search'>
                 <button className={cx(styles.searchButton, styles.fadeIn)}>
-                  <i className='fa fa-search'/> 我要找
+                  <i className='fas fa-search'/> 我要找
                 </button>
               </Link>
             )
@@ -111,7 +111,7 @@ export default class Header extends React.Component {
       <div className='mobile-nav-buttons-left'>
         {
           backButton && (
-            <button><i className='fa fa-chevron-left'/></button>
+            <button><i className='fas fa-chevron-left'/></button>
           )
         }
       </div>
@@ -125,7 +125,7 @@ export default class Header extends React.Component {
       <div className={styles.navigationButtons}>
         {
           closeButton ? (
-            <button><i className='fa fa-times'/></button>
+            <button><i className='fas fa-times'/></button>
           ) : (
             <div>
               <Link to='/search'>
@@ -135,11 +135,11 @@ export default class Header extends React.Component {
                     [styles.fadeOut]: !collapsed,
                   })
                 }>
-                  <i className='fa fa-search'/>
+                  <i className='fas fa-search'/>
                 </button>
               </Link>
               <button className={styles.navigationButton}>
-                <i className='fa fa-bars'/>
+                <i className='fas fa-bars'/>
               </button>
             </div>
           )

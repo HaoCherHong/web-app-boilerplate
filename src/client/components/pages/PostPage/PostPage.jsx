@@ -39,7 +39,7 @@ export default class PostPage extends React.Component {
           <Gallery post={post}/>
           <div className={styles.information}>
             {this.renderSmallProperties(post)}
-            {this.renderProperty('自我介紹', post.introduction, 'fa fa-paw')}
+            {this.renderProperty('自我介紹', post.introduction, 'fas fa-paw')}
             {post.notice && this.renderProperty('認養須知', post.notice, 'far fa-hand-point-right')}
           </div>
         </div>
@@ -88,7 +88,7 @@ export default class PostPage extends React.Component {
         <header className={styles.title}>{post.title}</header>
         <div>
           <div className={styles.smallProperty}>
-            <i className={classNames(styles.propertyIcon, 'fa', {
+            <i className={classNames(styles.propertyIcon, 'fas', {
               'fa-male': post.gender === 'boy',
               'fa-female': post.gender === 'girl'
             })}/>
@@ -99,15 +99,16 @@ export default class PostPage extends React.Component {
             {post.location.city + post.location.district}
           </div>
           <div className={styles.smallProperty}>
-            <i className={classNames(styles.propertyIcon, 'fa', 'fa-birthday-cake')}/>
+            <i className={classNames(styles.propertyIcon, 'fas', 'fa-birthday-cake')}/>
             {(birthdayYear ? birthdayYear + '歲' : '') + (birthdayMonth ? birthdayMonth + '個月' : '')}
           </div>
           <div className={styles.smallProperty}>
-            <i className={classNames(styles.propertyIcon, 'fa', 'fa-user-md')}/>
+            <i className={classNames(styles.propertyIcon, 'fas', 'fa-user-md')}/>
             {post.ligated ? '已結紮' : '未結紮'}
           </div>
         </div>
       </div>
+
     );
   }
 
