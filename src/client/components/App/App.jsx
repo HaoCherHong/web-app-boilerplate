@@ -9,7 +9,7 @@ import Header from './Header';
 
 import styles from './App.css';
 
-@connect()
+@connect(state => ({state}))
 export default class App extends React.Component {
   componentDidMount() {
     this.onRouteChanged();
@@ -22,7 +22,7 @@ export default class App extends React.Component {
   }
 
   onRouteChanged() {
-    const {history, location, dispatch} = this.props;
+    const {history, location, dispatch, state} = this.props;
     // TODO: fetch only when PUSH
     // if (history.action === 'PUSH') {
     if (true) {
@@ -33,7 +33,8 @@ export default class App extends React.Component {
           location,
           history,
           dispatch,
-          match
+          match,
+          state
         });
       });
     }

@@ -81,7 +81,7 @@ export default class PostsPage extends React.Component {
             <div className={styles.property}>{this.renderAge(post.age)}</div>
             <div className={styles.property}>{this.renderLocation(post.location)}</div>
             <div className={styles.property}>
-              <i className="fa fa-paw"/>
+              <i className='fa fa-paw'/>
               {post.introduction}
             </div>
           </div>
@@ -106,7 +106,7 @@ export default class PostsPage extends React.Component {
     const month = getMonth(age);
     return (
       <span>
-        <i className="fa fa-birthday-cake"/>
+        <i className='fa fa-birthday-cake'/>
         {(year ? year + '歲' : '') + (month ? month + '個月' : '')}
       </span>
     );
@@ -115,7 +115,7 @@ export default class PostsPage extends React.Component {
   renderLocation = location => {
     return (
       <span>
-        <i className="fa fa-map-marker"/>
+        <i className='fas fa-map-marker-alt'/>
         {location.city + location.district}
       </span>
     );

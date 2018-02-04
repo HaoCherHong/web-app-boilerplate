@@ -1,5 +1,9 @@
 .wrapper {
-  height: 370px;
+  height: 60px;
+}
+
+.expandable {
+  height: 370px !important;
 }
 
 .header {

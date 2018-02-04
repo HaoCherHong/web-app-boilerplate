@@ -1,5 +1,6 @@
 import App from './components/App';
 import PostsPage from './components/pages/PostsPage';
+import PostPage from './components/pages/PostPage';
 
 export default [
   {
@@ -7,7 +8,12 @@ export default [
     routes: [
       {
         path: '/posts',
-        component: PostsPage
+        component: PostsPage,
+        exact: true
+      },
+      {
+        path: '/posts/:postId',
+        component: PostPage
       }
     ]
   }

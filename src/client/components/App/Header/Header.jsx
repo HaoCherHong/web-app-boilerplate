@@ -11,7 +11,7 @@ const MAX_Y_OFFSET = 290;
 const	HEADER_HEIGHT = 62;
 
 const getExpandable = location => (
-  /^\/posts/.test(location.pathname)
+  /^\/posts\/?$/.test(location.pathname)
 );
 
 const getCollapsed = (collapsed, expandable) => {
@@ -60,7 +60,7 @@ export default class Header extends React.Component {
     const { headerTop, expandable, collapsed } = this.state;
 
     return (
-      <header className={styles.wrapper}>
+      <header className={cx(styles.wrapper, {[styles.expandable]: expandable})}>
         <div
           className={cx(styles.header, {
             [styles.collapsed]: collapsed
