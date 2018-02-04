@@ -33,6 +33,6 @@ server.use('*', (req, res) => {
 
 server.listen(config.port, config.host, () => {
   console.log('Server listening on %s:%d', config.host, config.port);
-})
+});
 
 export default server;
