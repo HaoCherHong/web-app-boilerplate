@@ -55,6 +55,9 @@ export default class PostsPage extends React.Component {
       <div className={styles.postsPage}>
         {posts.map(this.renderPost)}
         <PageList pageCount={pageCount} currentPage={currentPage}/>
+        <footer className={styles.footer}>
+          PUPY © 2015
+        </footer>
       </div>
     );
   }

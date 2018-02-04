@@ -13,7 +13,8 @@ export default [
       },
       {
         path: '/posts/:postId',
-        component: PostPage
+        component: PostPage,
+        exact: true
       }
     ]
   }

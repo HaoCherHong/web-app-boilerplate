@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {provideHooks} from 'redial';
+import classNames from 'classnames';
 
 import {getPost} from '../../../actions/posts';
 
@@ -32,7 +34,7 @@ export default class PostPage extends React.Component {
 
     return (
       <div className={styles.container}>
-        <div className={styles.post}>
+        <div>
           {this.renderHeader(post)}
           <Gallery post={post}/>
           <div className={styles.information}>
@@ -41,6 +43,7 @@ export default class PostPage extends React.Component {
             {post.notice && this.renderProperty('認養須知', post.notice, 'far fa-hand-point-right')}
           </div>
         </div>
+        {this.renderCommandBar(post)}
       </div>
     );
   }
@@ -85,21 +88,42 @@ export default class PostPage extends React.Component {
         <header className={styles.title}>{post.title}</header>
         <div>
           <div className={styles.smallProperty}>
-            <i className={`${styles.propertyIcon} ${post.gender === 'boy' ? 'fa fa-male' : 'fa fa-female'}`}/>
+            <i className={classNames(styles.propertyIcon, 'fa', {
+              'fa-male': post.gender === 'boy',
+              'fa-female': post.gender === 'girl'
+            })}/>
             {post.gender === 'boy' ? '男生' : '女生'}
           </div>
           <div className={styles.smallProperty}>
-            <i className={`${styles.propertyIcon} fas fa-map-marker-alt`}/>
+            <i className={classNames(styles.propertyIcon, 'fas', 'fa-map-marker-alt')}/>
             {post.location.city + post.location.district}
           </div>
           <div className={styles.smallProperty}>
-            <i className={`${styles.propertyIcon} fa fa-birthday-cake`}/>
+            <i className={classNames(styles.propertyIcon, 'fa', 'fa-birthday-cake')}/>
             {(birthdayYear ? birthdayYear + '歲' : '') + (birthdayMonth ? birthdayMonth + '個月' : '')}
           </div>
           <div className={styles.smallProperty}>
-            <i className={`${styles.propertyIcon} fa fa-user-md`}/>
+            <i className={classNames(styles.propertyIcon, 'fa', 'fa-user-md')}/>
             {post.ligated ? '已結紮' : '未結紮'}
           </div>
+        </div>
+      </div>
+    );
+  }
+
+  renderCommandBar(post) {
+    return (
+      <div className={styles.commandBarWrapper}>
+        <div className={styles.commandBar}>
+          <div className={styles.interactionCount}>
+            <Link to={`/posts/${post._id}/comments`}>
+              {post.followersCount}人追蹤、{0}則留言
+            </Link>
+          </div>
+          <button className={classNames(styles.commandButton, styles.followButton)}/>
+          <Link to={`/posts/${post._id}/comments`}>
+            <button className={classNames(styles.commandButton, styles.commentButton)}/>
+          </Link>
         </div>
       </div>
     );

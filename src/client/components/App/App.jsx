@@ -46,9 +46,6 @@ export default class App extends React.Component {
       <div>
         <Header/>
         {renderRoutes(route.routes)}
-        <footer className={styles.footer}>
-          PUPY © 2015
-        </footer>
       </div>
     );
   }

@@ -2,10 +2,6 @@
   padding-top: 30px;
 }
 
-.post {
-  border-bottom: 1px solid #dcdddd;
-}
-
 .header {
   background-color: #ffffff;
   display: flex;
@@ -65,4 +61,44 @@
 .propertyIcon {
   text-align: center;
   width: 18px;
+}
+
+.commandBarWrapper {
+  height: 54px;
+}
+
+.commandBar {
+  background-color: #f7f8f8;
+  bottom: 0;
+  color: #898989;
+  display: flex;
+  font-size: 14px;
+  height: 54px;
+  left: 0;
+  line-height: 54px;
+  padding: 0 18px 0 18px;
+  position: fixed;
+  width: 100%;
+}
+
+.interactionCount {
+  flex: 1;
+}
+
+.commandButton {
+  background-position: center;
+  background-size: 30px;
+  background-repeat: no-repeat;
+  flex: 0 0 auto;
+  width: 54px;
+  height: 54px;
+  margin-left: 6px;
+}
+
+.followButton {
+  background-image: url(../../../images/mobile_icon_follow@2x.png);
+}
+
+.commentButton {
+  background-image: url(../../../images/mobile_icon_meassage@2x.png);
 }
