@@ -31,3 +31,18 @@ export const listPosts = (page = 1, getPageCount = false) => dispatch => {
     }
   };
 };
+
+export const getComments = postId => dispatch => {
+  api(`/posts/${postId}/comments`).then(comments => {
+    dispatch({
+      type: 'getComments',
+      payload: comments,
+      postId
+    });
+  });
+
+  return {
+    type: 'getComments',
+    postId
+  };
+};

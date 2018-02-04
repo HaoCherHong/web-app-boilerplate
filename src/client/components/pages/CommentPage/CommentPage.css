@@ -1,0 +1,97 @@
+.container {
+  padding-top: 15px;
+}
+
+.comment {
+  background: white;
+  color: #595757;
+  display: flex;
+  font-size: 16px;
+  margin-bottom: 2px;
+  padding: 15px;
+}
+
+.avatar {
+  flex: 0 0 auto;
+  width: 50px;
+}
+
+.information {
+  flex: 1;
+  margin-left: 15px;
+}
+
+.userName {
+  color: #00aeeb !important;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.time {
+  color: #b5b6b6;
+  font-size: 12px;
+  margin-left: 25px;
+}
+
+.reply {
+  display: flex;
+  margin-left: 5px;
+  color: #e85382;
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+.replyIcon {
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+}
+
+.replyBody {
+  flex: 1;
+}
+
+.commentBarWrapper {
+  height: 54px;
+}
+
+.commentBar {
+  background: white;
+  bottom: 0;
+  display: flex;
+  font-size: 0;
+  height: 54px;
+  left: 0;
+  position: fixed;
+  width: 100%;
+}
+
+.commentBarInput {
+  flex: 1;
+  height: 100%;
+  border: none;
+}
+
+.commentBarWhisper {
+  flex: 0 0 auto;
+  color: #9fa0a0;
+  font-size: 15px;
+  padding: 19.5px 17.5px;
+}
+
+.commentBarCheckBox {
+  display: none;
+}
+
+.commentBarButton {
+  flex: 0 0 auto;
+  border: 0;
+  background: #e85382;
+  color: white;
+  font-size: 21px;
+  font-weight: bold;
+  padding: 0 14px;
+  height: 100%;
+}
