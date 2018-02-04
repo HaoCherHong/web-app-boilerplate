@@ -10,7 +10,8 @@
     "build:client": "cross-env NODE_ENV=production webpack --config webpack/client --progress",
     "build:server": "cross-env NODE_ENV=production webpack --config webpack/server --progress",
     "clean": "rm -rf build",
-    "rebuild": "npm run clean && npm run build"
+    "rebuild": "npm run clean && npm run build",
+    "lint": "eslint . --ext .js"
   },
   "author": "Hao-Cher Hong",
   "license": "ISC",
