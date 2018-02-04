@@ -117,7 +117,7 @@ export default class PostPage extends React.Component {
         <div className={styles.commandBar}>
           <div className={styles.interactionCount}>
             <Link to={`/posts/${post._id}/comments`}>
-              {post.followersCount}人追蹤、{0}則留言
+              {post.followersCount}人追蹤、{post.commentCount}則留言
             </Link>
           </div>
           <button className={classNames(styles.commandButton, styles.followButton)}/>
