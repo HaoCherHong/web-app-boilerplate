@@ -112,3 +112,7 @@ input {
   margin-top: 10px;
 }
 
+.container {
+  margin: auto;
+  max-width: 600px;
+}

@@ -9,6 +9,10 @@ import Header from './Header';
 
 import styles from './App.css';
 
+const getHeaderExpandable = location => (
+  /^\/posts\/?$/.test(location.pathname)
+);
+
 @connect(state => ({state}))
 export default class App extends React.Component {
   componentDidMount() {
@@ -26,7 +30,10 @@ export default class App extends React.Component {
     // TODO: fetch only when PUSH
     // if (history.action === 'PUSH') {
     if (true) {
-      window.scrollTo(0, 290);
+      if (getHeaderExpandable(location))
+        window.scrollTo(0, 290);
+      else
+        window.scrollTo(0, 0);
       const branch = matchRoutes(routes, location.pathname);
       branch.forEach(({match, route: {component}}) => {
         trigger('fetch', component, {
@@ -45,7 +52,9 @@ export default class App extends React.Component {
     return (
       <div>
         <Header/>
-        {renderRoutes(route.routes)}
+        <div className={styles.container}>
+          {renderRoutes(route.routes)}
+        </div>
       </div>
     );
   }
