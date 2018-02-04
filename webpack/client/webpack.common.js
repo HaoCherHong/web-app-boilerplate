@@ -3,6 +3,7 @@ const path = require('path');
 module.exports = {
   resolve: {
     modules: [
+      path.resolve('./'),
       path.resolve('./src/client'),
       path.resolve('./node_modules')
     ],

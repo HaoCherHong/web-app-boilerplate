@@ -1,4 +1,4 @@
-import config from '../../../config';
+import config from 'config';
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {

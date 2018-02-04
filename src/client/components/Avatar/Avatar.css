@@ -12,11 +12,11 @@
 }
 
 .dog {
-	background-image: url(../../images/default_portrait_dog_a@2x.png);
+	background-image: url(images/default_portrait_dog_a@2x.png);
 }
 
 .cat {
-	background-image: url(../../images/default_portrait_cat_a@2x.png);
+	background-image: url(images/default_portrait_cat_a@2x.png);
 }
 
 .guest {

@@ -3,8 +3,8 @@ import {connect} from 'react-redux';
 import {provideHooks} from 'redial';
 import classNames from 'classnames';
 
-import relativizeTime from '../../../utils/relativizeTime';
-import {getComments} from '../../../actions/posts';
+import relativizeTime from 'utils/relativizeTime';
+import {getComments} from 'actions/posts';
 
 import Avatar from '../../Avatar';
 

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {renderRoutes, matchRoutes} from "react-router-config";
 import {trigger} from 'redial';
 
-import routes from '../../routes';
+import routes from 'routes';
 
 import Header from './Header';
 

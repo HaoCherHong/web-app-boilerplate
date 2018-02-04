@@ -4,13 +4,13 @@ import {Link} from 'react-router-dom';
 import {provideHooks} from 'redial';
 import classNames from 'classnames';
 
-import {getPost} from '../../../actions/posts';
+import {getPost} from 'actions/posts';
 
 import Avatar from '../../Avatar';
 import Gallery from '../../posts/Gallery';
 
-import relativizeTime from '../../../utils/relativizeTime';
-import {getMonth, getYear} from '../../../utils/convertAge';
+import relativizeTime from 'utils/relativizeTime';
+import {getMonth, getYear} from 'utils/convertAge';
 
 import styles from './PostPage.css';
 

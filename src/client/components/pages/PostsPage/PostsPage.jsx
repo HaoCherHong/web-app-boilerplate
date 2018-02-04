@@ -3,15 +3,15 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {provideHooks} from 'redial';
 
-import relativizeTime from '../../../utils/relativizeTime';
-import {getMonth, getYear} from '../../../utils/convertAge';
+import relativizeTime from 'utils/relativizeTime';
+import {getMonth, getYear} from 'utils/convertAge';
 
 import Avatar from '../../Avatar';
 import Gallery from '../../posts/Gallery';
 import PageList from '../../posts/PageList';
 import querystring from 'querystring';
 
-import {listPosts} from '../../../actions/posts';
+import {listPosts} from 'actions/posts';
 
 import styles from './PostsPage.css';
 

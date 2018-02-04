@@ -26,13 +26,13 @@
 
 .left {
 	float: left;
-	background: url(../../../images/arr_left@2x.png) no-repeat;
+	background: url(images/arr_left@2x.png) no-repeat;
 	background-position: left 15px center;
 	background-size: auto 50px;
 }
 .right {
 	float: right;
-	background: url(../../../images/arr_right@2x.png) no-repeat;
+	background: url(images/arr_right@2x.png) no-repeat;
 	background-position: right 15px center;
 	background-size: auto 50px;
 }
