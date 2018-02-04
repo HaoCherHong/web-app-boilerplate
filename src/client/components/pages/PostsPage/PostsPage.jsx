@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {provideHooks} from 'redial';
 
@@ -8,35 +9,59 @@ import {getMonth, getYear} from '../../../utils/convertAge';
 import Avatar from '../../Avatar';
 import Gallery from '../../posts/Gallery';
 import PageList from '../../posts/PageList';
+import querystring from 'querystring';
 
 import {listPosts} from '../../../actions/posts';
 
 import styles from './PostsPage.css';
 
-@connect(state => ({
-  posts: state.posts,
-  postsPagination: state.postsPagination
-}))
+function parsePageFromSearch(search) {
+  return querystring.parse(search.slice(1)).p || 1;
+}
+
+function getPaginationKey(search) {
+  const query = querystring.parse(search.slice(1));
+  delete query.p;
+  return querystring.stringify(query);
+}
+
+@connect((state, ownProps) => {
+  const page = parsePageFromSearch(ownProps.location.search).toString();
+  const paginationKey = getPaginationKey(ownProps.location.search);
+  const paginationQuery = state.postsPagination.get(paginationKey);
+  const pagination = paginationQuery && paginationQuery.get('pages').get(page);
+  return {
+    currentPage: paginationQuery && paginationQuery.get('currentPage'),
+    pageCount: paginationQuery && paginationQuery.get('pages').count(),
+    isLoading: pagination && pagination.get('isLoading'),
+    posts: pagination && pagination.get('entries').map(postId => state.posts.get(postId))
+  };
+})
 @provideHooks({
-  fetch: ({dispatch}) => {
-    dispatch(listPosts(1, true));
+  fetch: ({dispatch, location: {search}}) => {
+    const page = parsePageFromSearch(search);
+    dispatch(listPosts(page, true));
   }
 })
 export default class PostsPage extends React.Component {
   render() {
-    const {posts, postsPagination} = this.props;
+    const {posts, pageCount, location: {search}} = this.props;
+    const currentPage = parsePageFromSearch(search);
+
+    if (!posts)
+      return null;
 
     return (
       <div className={styles.postsPage}>
         {posts.map(this.renderPost)}
-        <PageList pageCount={postsPagination} currentPage={1}/>
+        <PageList pageCount={pageCount} currentPage={currentPage}/>
       </div>
     );
   }
 
   renderPost = (post, index) => {
     return (
-      <div key={index} className={styles.post}>
+      <Link key={index} className={styles.post} to={`/posts/${post._id}`}>
         <header className={styles.header}>
           <div className={styles.headerAvatar}>
             <Avatar portrait={post.author.portrait} size={40}/>
@@ -61,7 +86,7 @@ export default class PostsPage extends React.Component {
             </div>
           </div>
         </div>
-      </div>
+      </Link>
     );
   }
 

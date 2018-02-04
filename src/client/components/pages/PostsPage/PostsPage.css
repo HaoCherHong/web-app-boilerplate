@@ -4,6 +4,7 @@
 }
 
 .post {
+  display: block;
   background-color: #ffffff;
   border-bottom: 1px solid #dcdddd;
   margin-top: 30px;

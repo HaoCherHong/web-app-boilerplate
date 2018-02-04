@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Route, Redirect, Switch, withRouter} from 'react-router-dom';
 import {renderRoutes, matchRoutes} from "react-router-config";
 import {trigger} from 'redial';
 
@@ -10,7 +9,6 @@ import Header from './Header';
 
 import styles from './App.css';
 
-@withRouter
 @connect()
 export default class App extends React.Component {
   componentDidMount() {
@@ -28,11 +26,14 @@ export default class App extends React.Component {
     // TODO: fetch only when PUSH
     // if (history.action === 'PUSH') {
     if (true) {
+      window.scrollTo(0, 290);
       const branch = matchRoutes(routes, location.pathname);
       branch.forEach(({match, route: {component}}) => {
         trigger('fetch', component, {
-          ...match,
-          dispatch
+          location,
+          history,
+          dispatch,
+          match
         });
       });
     }
