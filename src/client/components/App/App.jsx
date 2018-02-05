@@ -27,13 +27,12 @@ export default class App extends React.Component {
 
   onRouteChanged() {
     const {history, location, dispatch, state} = this.props;
-    // TODO: fetch only when PUSH
-    // if (history.action === 'PUSH') {
-    if (true) {
+    if (history.action === 'PUSH') {
       if (getHeaderExpandable(location))
         window.scrollTo(0, 290);
       else
         window.scrollTo(0, 0);
+
       const branch = matchRoutes(routes, location.pathname);
       branch.forEach(({match, route: {component}}) => {
         trigger('fetch', component, {
@@ -48,12 +47,12 @@ export default class App extends React.Component {
   }
 
   render() {
-    const {route} = this.props;
+    const {route: {routes}} = this.props;
     return (
       <div>
         <Header/>
         <div className={styles.container}>
-          {renderRoutes(route.routes)}
+          {renderRoutes(routes)}
         </div>
       </div>
     );

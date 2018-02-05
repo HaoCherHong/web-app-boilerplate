@@ -2,7 +2,8 @@ import React from 'react';
 
 export default class HtmlDocument extends React.PureComponent {
   render() {
-    const {children} = this.props;
+    const {children, state} = this.props;
+    const dehydratedState = 'window.$STATE=' + JSON.stringify(state);
 
     return (
       <html>
@@ -17,6 +18,7 @@ export default class HtmlDocument extends React.PureComponent {
           <div id='react-root'>
             {children}
           </div>
+          <script type='text/javascript' dangerouslySetInnerHTML={{__html: dehydratedState}}/>
           <script type='text/javascript' src='/build/app.bundle.js'></script>
         </body>
       </html>

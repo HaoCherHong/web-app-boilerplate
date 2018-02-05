@@ -1,5 +1,5 @@
 import querystring from 'querystring';
-import {Map, Range, fromJS} from 'immutable';
+import {Map, Range, List, fromJS} from 'immutable';
 
 export default function postsPagination(state = new Map(), action) {
   switch (action.type) {
@@ -23,7 +23,7 @@ export default function postsPagination(state = new Map(), action) {
           state = state.mergeDeep(fromJS({
             [key]: {
               pages: Range(1, action.payload.pageCount + 1).reduce((map, p) => map.set(p.toString(), fromJS({
-                entries: [],
+                entries: new List(),
                 isLoading: false,
                 isLoaded: false
               })), new Map())
@@ -36,7 +36,7 @@ export default function postsPagination(state = new Map(), action) {
           [key]: {
             pages: {
               [page]: {
-                entries: action.payload.posts.map(post => post._id),
+                entries: new List(action.payload.posts.map(post => post._id)),
                 isLoading: false,
                 isLoaded: true
               }
@@ -52,6 +52,7 @@ export default function postsPagination(state = new Map(), action) {
             currentPage: page,
             pages: {
               [page]: {
+                entries: [],
                 isLoading: true,
                 isLoaded: false
               }

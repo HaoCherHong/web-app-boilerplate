@@ -1,5 +1,5 @@
 import React from 'react';
-import {renderToStaticMarkup} from 'react-dom/server';
+import {renderToString} from 'react-dom/server';
 import StaticRouter from 'react-router-dom/StaticRouter';
 import {renderRoutes, matchRoutes} from 'react-router-config';
 import {createMemoryHistory} from 'history';
@@ -27,8 +27,8 @@ export default async function serverSideRender(url) {
     })
   )));
 
-  const html = '<!DOCTYPE html>' + renderToStaticMarkup((
-    <HtmlDocument>
+  const html = '<!DOCTYPE html>' + renderToString((
+    <HtmlDocument state={store.getState()}>
       <Provider store={store}>
         <StaticRouter location={url} context={context}>
           {renderRoutes(routes)}

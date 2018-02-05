@@ -10,13 +10,14 @@ export default class Gallery extends React.Component {
 
   render() {
     const {post} = this.props;
+    const photos = post.get('photos');
     const {currentIndex} = this.state;
 
     return (
       <div className={styles.gallery}>
-        <img className={styles.image} src={'/images/pictures/' + post.photos[currentIndex]}/>
+        <img className={styles.image} src={'/images/pictures/' + photos.get(currentIndex)}/>
         {
-          post.photos.length >= 2 && (
+          photos.count() >= 2 && (
             <div className={styles.navigate}>
               <div className={classNames(styles.left, styles.sideArea)} onClick={this.handlePreviousClick}/>
               <div className={classNames(styles.right, styles.sideArea)} onClick={this.handleNextClick}/>
@@ -24,7 +25,7 @@ export default class Gallery extends React.Component {
           )
         }
         {
-          post.adopted && <div className="adopted" title="已被認養"/>
+          post.get('adopted') && <div className="adopted" title="已被認養"/>
         }
       </div>
     );
@@ -34,10 +35,11 @@ export default class Gallery extends React.Component {
     e.preventDefault();
 
     const {post} = this.props;
+    const photos = post.get('photos');
     const {currentIndex} = this.state;
 
     this.setState({
-      currentIndex: (currentIndex + 1) % post.photos.length
+      currentIndex: (currentIndex + 1) % photos.count()
     });
   }
 
@@ -45,10 +47,11 @@ export default class Gallery extends React.Component {
     e.preventDefault();
 
     const {post} = this.props;
+    const photos = post.get('photos');
     const {currentIndex} = this.state;
 
     this.setState({
-      currentIndex: currentIndex == 0 ? post.photos.length - 1 : currentIndex - 1
+      currentIndex: currentIndex == 0 ? photos.count() - 1 : currentIndex - 1
     });
   }
 }

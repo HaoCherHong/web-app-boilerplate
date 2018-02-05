@@ -43,22 +43,23 @@ export default class CommentPage extends React.Component {
   }
 
   renderComment = (comment, index) => {
+    const user = comment.get('user');
     return (
       <div key={index} className={styles.comment}>
         <div className={styles.avatar}>
-          <Avatar portrait={comment.user.portrait} size={50}/>
+          <Avatar portrait={user.get('portrait')} size={50}/>
         </div>
         <div className={styles.information}>
           <header className={styles.userName}>
-            {comment.user.name}
+            {user.get('name')}
           </header>
           <div>
-            {comment.whisper && <i title='悄悄話' className='fas fa-eye-slash'/>}
-            <span>{comment.body}</span>
-            <span className={styles.time}>{relativizeTime(comment.createdAt)}</span>
+            {comment.get('whisper') && <i title='悄悄話' className='fas fa-eye-slash'/>}
+            <span>{comment.get('body')}</span>
+            <span className={styles.time}>{relativizeTime(comment.get('createdAt'))}</span>
           </div>
           <div>
-            {comment.replies.map(this.renderReply)}
+            {comment.get('replies').map(this.renderReply)}
           </div>
         </div>
       </div>
@@ -71,10 +72,10 @@ export default class CommentPage extends React.Component {
         <img alt='回覆' className={styles.replyIcon} src={replyIcon}/>
         <div className={styles.replyBody}>
           {
-            reply.whisper && <i title='悄悄話' className='far fa-eye-slash'/>
+            reply.get('whisper') && <i title='悄悄話' className='far fa-eye-slash'/>
           }
-          <span>{reply.body}</span>
-          <span className={styles.time}>{relativizeTime(reply.createdAt)}</span>
+          <span>{reply.get('body')}</span>
+          <span className={styles.time}>{relativizeTime(reply.get('createdAt'))}</span>
         </div>
       </div>
     );

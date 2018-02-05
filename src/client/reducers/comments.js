@@ -1,4 +1,4 @@
-import {Map, List} from 'immutable';
+import {Map, List, fromJS} from 'immutable';
 
 export default function comments(state = new Map(), action) {
   if (!action.payload)
@@ -9,7 +9,7 @@ export default function comments(state = new Map(), action) {
     {
       if (action.payload) {
         return state.set(action.postId, new Map({
-          entries: new List(action.payload),
+          entries: fromJS(action.payload),
           isLoading: false,
           isLoaded: true
         }));

@@ -63,29 +63,30 @@ export default class PostsPage extends React.Component {
   }
 
   renderPost = (post, index) => {
+    const author = post.get('author');
     return (
-      <Link key={index} className={styles.post} to={`/posts/${post._id}`}>
+      <Link key={index} className={styles.post} to={`/posts/${post.get('_id')}`}>
         <header className={styles.header}>
           <div className={styles.headerAvatar}>
-            <Avatar portrait={post.author.portrait} size={40}/>
+            <Avatar portrait={author.get('portrait')} size={40}/>
           </div>
           <div className={styles.headerName}>
-            {post.author.name}
+            {author.get('name')}
           </div>
           <div className={styles.headerTime}>
-            {relativizeTime(post.createdAt)}
+            {relativizeTime(post.get('createdAt'))}
           </div>
         </header>
         <Gallery post={post}/>
         <div className={styles.information}>
-          <header className={styles.title}>{post.title}</header>
+          <header className={styles.title}>{post.get('title')}</header>
           <div className={styles.properties}>
-            <div className={styles.property}>{this.renderGender(post.gender)}</div>
-            <div className={styles.property}>{this.renderAge(post.age)}</div>
-            <div className={styles.property}>{this.renderLocation(post.location)}</div>
+            <div className={styles.property}>{this.renderGender(post.get('gender'))}</div>
+            <div className={styles.property}>{this.renderAge(post.get('age'))}</div>
+            <div className={styles.property}>{this.renderLocation(post.get('location'))}</div>
             <div className={styles.property}>
               <i className='fas fa-paw'/>
-              {post.introduction}
+              {post.get('introduction')}
             </div>
           </div>
         </div>

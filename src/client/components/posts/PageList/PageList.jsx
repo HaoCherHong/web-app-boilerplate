@@ -6,7 +6,7 @@ import styles from './PageList.css';
 
 export default class PageList extends React.PureComponent {
   render() {
-    const { pageCount, currentPage } = this.props;
+    const {pageCount, currentPage} = this.props;
 
     const pages = [];
 

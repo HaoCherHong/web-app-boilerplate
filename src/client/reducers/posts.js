@@ -1,4 +1,4 @@
-import {Map} from 'immutable';
+import {Map, fromJS} from 'immutable';
 
 export default function posts(state = new Map(), action) {
   if (!action.payload)
@@ -8,10 +8,10 @@ export default function posts(state = new Map(), action) {
     case 'listPosts':
       return action.payload.posts.reduce((map, post) => {
         map[post._id] = post;
-        return map.set(post._id, post);
+        return map.set(post._id, fromJS(post));
       }, state);
     case 'getPost':
-      return state.set(action.payload._id, action.payload);
+      return state.set(action.payload._id, fromJS(action.payload));
   }
   return state;
 }

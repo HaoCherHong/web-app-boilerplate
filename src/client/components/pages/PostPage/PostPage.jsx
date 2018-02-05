@@ -39,8 +39,8 @@ export default class PostPage extends React.Component {
           <Gallery post={post}/>
           <div className={styles.information}>
             {this.renderSmallProperties(post)}
-            {this.renderProperty('自我介紹', post.introduction, 'fas fa-paw')}
-            {post.notice && this.renderProperty('認養須知', post.notice, 'far fa-hand-point-right')}
+            {this.renderProperty('自我介紹', post.get('introduction'), 'fas fa-paw')}
+            {post.get('notice') && this.renderProperty('認養須知', post.get('notice'), 'far fa-hand-point-right')}
           </div>
         </div>
         {this.renderCommandBar(post)}
@@ -49,16 +49,17 @@ export default class PostPage extends React.Component {
   }
 
   renderHeader(post) {
+    const author = post.get('author');
     return (
       <header className={styles.header}>
         <div className={styles.headerAvatar}>
-          <Avatar portrait={post.author.portrait} size={40}/>
+          <Avatar portrait={author.get('portrait')} size={40}/>
         </div>
         <div className={styles.headerName}>
-          {post.author.name}
+          {author.get('name')}
         </div>
         <div className={styles.headerTime}>
-          {relativizeTime(post.createdAt)}
+          {relativizeTime(post.get('createdAt'))}
         </div>
       </header>
     );
@@ -80,23 +81,27 @@ export default class PostPage extends React.Component {
   }
 
   renderSmallProperties(post) {
-    const birthdayYear = getYear(post.age);
-    const birthdayMonth = getMonth(post.age);
+    const age = post.get('age');
+    const gender = post.get('gender');
+    const location = post.get('location');
+
+    const birthdayYear = getYear(age);
+    const birthdayMonth = getMonth(age);
 
     return (
       <div className={styles.properties}>
-        <header className={styles.title}>{post.title}</header>
+        <header className={styles.title}>{post.get('title')}</header>
         <div>
           <div className={styles.smallProperty}>
             <i className={classNames(styles.propertyIcon, 'fas', {
-              'fa-male': post.gender === 'boy',
-              'fa-female': post.gender === 'girl'
+              'fa-male': gender === 'boy',
+              'fa-female': gender === 'girl'
             })}/>
-            {post.gender === 'boy' ? '男生' : '女生'}
+            {gender === 'boy' ? '男生' : '女生'}
           </div>
           <div className={styles.smallProperty}>
             <i className={classNames(styles.propertyIcon, 'fas', 'fa-map-marker-alt')}/>
-            {post.location.city + post.location.district}
+            {location.get('city') + location.get('district')}
           </div>
           <div className={styles.smallProperty}>
             <i className={classNames(styles.propertyIcon, 'fas', 'fa-birthday-cake')}/>
@@ -104,7 +109,7 @@ export default class PostPage extends React.Component {
           </div>
           <div className={styles.smallProperty}>
             <i className={classNames(styles.propertyIcon, 'fas', 'fa-user-md')}/>
-            {post.ligated ? '已結紮' : '未結紮'}
+            {post.get('ligated') ? '已結紮' : '未結紮'}
           </div>
         </div>
       </div>
@@ -117,12 +122,12 @@ export default class PostPage extends React.Component {
       <div className={styles.commandBarWrapper}>
         <div className={styles.commandBar}>
           <div className={styles.interactionCount}>
-            <Link to={`/posts/${post._id}/comments`}>
-              {post.followersCount}人追蹤、{post.commentCount}則留言
+            <Link to={`/posts/${post.get('_id')}/comments`}>
+              {post.get('followersCount')}人追蹤、{post.get('commentCount')}則留言
             </Link>
           </div>
           <button className={classNames(styles.commandButton, styles.followButton)}/>
-          <Link to={`/posts/${post._id}/comments`}>
+          <Link to={`/posts/${post.get('_id')}/comments`}>
             <button className={classNames(styles.commandButton, styles.commentButton)}/>
           </Link>
         </div>
