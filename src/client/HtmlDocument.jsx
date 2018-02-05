@@ -1,8 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class HtmlDocument extends React.PureComponent {
+  static contextTypes = {
+    store: PropTypes.object
+  };
+
   render() {
-    const {children, state} = this.props;
+    const {store} = this.context;
+    const {children} = this.props;
+    const state = store.getState();
     const dehydratedState = 'window.$STATE=' + JSON.stringify(state);
 
     return (

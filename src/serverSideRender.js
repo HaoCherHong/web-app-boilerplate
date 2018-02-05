@@ -13,10 +13,11 @@ import configureStore from './client/configureStore';
 
 export default async function serverSideRender(url) {
   const store = configureStore();
-  const branch = matchRoutes(routes, url);
-  const history = createMemoryHistory(url);
-  const context = {};
+  const history = createMemoryHistory({
+    initialEntries: [url]
+  });
 
+  const branch = matchRoutes(routes, history.location.pathname);
   await Promise.all(branch.map(({match, route: {component}}) => (
     trigger('fetch', component, {
       history,
@@ -27,14 +28,15 @@ export default async function serverSideRender(url) {
     })
   )));
 
+  const context = {};
   const html = '<!DOCTYPE html>' + renderToString((
-    <HtmlDocument state={store.getState()}>
-      <Provider store={store}>
-        <StaticRouter location={url} context={context}>
+    <Provider store={store}>
+      <HtmlDocument>
+        <StaticRouter location={history.location} context={context}>
           {renderRoutes(routes)}
         </StaticRouter>
-      </Provider>
-    </HtmlDocument>
+      </HtmlDocument>
+    </Provider>
   ));
 
   return {
