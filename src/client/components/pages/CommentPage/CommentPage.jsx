@@ -23,7 +23,7 @@ import styles from './CommentPage.css';
   fetch: ({state, dispatch, match: {params: {postId}}}) => {
     const pagination = state.comments.get(postId);
     if(!pagination || !pagination.get('isLoaded') && !pagination.get('isLoading')) {
-      dispatch(getComments(postId));
+      return dispatch(getComments(postId));
     }
   }
 })

@@ -1,4 +1,5 @@
 import config from 'config';
+require('isomorphic-fetch');
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -15,8 +16,7 @@ function resolveUrl(base, path) {
 }
 
 export default function api(url, method = 'get', body = null) {
-  const isFormData = body instanceof FormData;
-  const headers = isFormData ? {} : {
+  const headers = {
     'Content-Type': 'application/json'
   };
 
@@ -25,7 +25,7 @@ export default function api(url, method = 'get', body = null) {
     method,
     // mode: 'no-cors',
     headers,
-    body: body && (isFormData ? body : JSON.stringify(body))
+    body: body && JSON.stringify(body)
   })
     .then(checkStatus)
     .then(res => res.json());

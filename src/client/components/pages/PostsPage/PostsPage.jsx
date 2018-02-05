@@ -40,7 +40,7 @@ function getPaginationKey(search) {
 @provideHooks({
   fetch: ({dispatch, location: {search}}) => {
     const page = parsePageFromSearch(search);
-    dispatch(listPosts(page, true));
+    return dispatch(listPosts(page, true));
   }
 })
 export default class PostsPage extends React.Component {

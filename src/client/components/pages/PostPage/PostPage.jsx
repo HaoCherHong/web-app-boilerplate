@@ -21,7 +21,7 @@ import styles from './PostPage.css';
   fetch: ({state, dispatch, match: {params: {postId}}}) => {
     const post = state.posts.get(postId);
     if (!post) {
-      dispatch(getPost(postId));
+      return dispatch(getPost(postId));
     }
   }
 })

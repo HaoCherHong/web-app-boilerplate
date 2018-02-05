@@ -28,14 +28,18 @@ const getCollapsed = (collapsed, expandable) => {
 @withRouter
 export default class Header extends React.Component {
 
-  state = {
-    headerTop: 0,
-    expandable: false,
-    collapsed: false,
-  }
-
   lastScrollY = 0;
   scrollDownDistance = 0;
+
+  constructor(props) {
+    super(props);
+    const expandable = getExpandable(props.location);
+    this.state = {
+      headerTop: 0,
+      expandable,
+      collapsed: !expandable,
+    };
+  }
 
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll, false);

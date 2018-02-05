@@ -3,6 +3,7 @@ import config from '../../config';
 import path from 'path';
 
 import api from './api';
+import render from './render';
 
 const server = express();
 
@@ -27,9 +28,12 @@ server.use('/api', api);
 
 server.use(express.static(path.resolve(__dirname, 'public')));
 
-server.use('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'public/index.html'));
-});
+if (process.env.NODE_ENV === 'development') {
+  server.use(express.static(path.resolve(__dirname, '../../build/public')));
+  server.use('*', render);
+} else {
+  // TODO: SSR
+}
 
 server.listen(config.port, config.host, () => {
   console.log('Server listening on %s:%d', config.host, config.port);
