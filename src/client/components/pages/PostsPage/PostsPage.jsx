@@ -120,7 +120,7 @@ export default class PostsPage extends React.Component {
     return (
       <span>
         <i className='fas fa-map-marker-alt'/>
-        {location.city + location.district}
+        {location.get('city') + location.get('district')}
       </span>
     );
   }
