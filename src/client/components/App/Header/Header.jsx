@@ -16,7 +16,7 @@ const getExpandable = location => (
 
 const getCollapsed = (collapsed, expandable) => {
   if (expandable) {
-    if (!collapsed && window.pageYOffset > MAX_Y_OFFSET)
+    if (!collapsed && window.pageYOffset >= MAX_Y_OFFSET)
       collapsed = true;
     else if (collapsed && window.pageYOffset < MAX_Y_OFFSET)
       collapsed = false;
