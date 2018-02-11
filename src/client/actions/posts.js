@@ -1,4 +1,7 @@
 import api from './api';
+import querystring from 'querystring';
+
+import {omit, omitBy, isUndefined} from 'lodash';
 
 export const getPost = (postId) => dispatch => {
   dispatch({
@@ -13,21 +16,26 @@ export const getPost = (postId) => dispatch => {
   });
 };
 
-export const listPosts = (page = 1, getPageCount = false) => dispatch => {
+export const listPosts = (page = 1, options = {}) => dispatch => {
+  const query = {
+    page,
+    ...options
+  };
+
+  const paginationKey = omitBy(omit(query, ['getPageCount']), isUndefined);
+
   dispatch({
     type: 'listPosts',
-    query: {
-      page
-    }
+    query: paginationKey
   });
 
-  return api(`/posts?page=${page}${getPageCount ? '&getPageCount=1' : ''}`).then(posts => {
+  const url = `/posts?${querystring.stringify(query)}`;
+
+  return api(url).then(posts => {
     dispatch({
       type: 'listPosts',
       payload: posts,
-      query: {
-        page
-      }
+      query: paginationKey
     });
   });
 };

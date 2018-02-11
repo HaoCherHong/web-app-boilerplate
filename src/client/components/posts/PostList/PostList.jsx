@@ -36,6 +36,9 @@ export default class PostList extends React.Component {
             .map(this.renderPost)
         }
         <PageList pageCount={pageCount} currentPage={currentPage}/>
+        <footer className={styles.footer}>
+          PUPY © 2015
+        </footer>
       </div>
     );
   }
@@ -45,32 +48,36 @@ export default class PostList extends React.Component {
     const post = posts.get(postId);
     const author = post.get('author');
     return (
-      <Link key={postId} className={styles.post} to={`/posts/${post.get('_id')}`}>
-        <header className={styles.header}>
-          <div className={styles.headerAvatar}>
-            <Avatar portrait={author.get('portrait')} size={40}/>
-          </div>
-          <div className={styles.headerName}>
-            {author.get('name')}
-          </div>
-          <div className={styles.headerTime}>
-            {relativizeTime(post.get('createdAt'))}
-          </div>
-        </header>
-        <Gallery post={post}/>
-        <div className={styles.information}>
-          <header className={styles.title}>{post.get('title')}</header>
-          <div className={styles.properties}>
-            <div className={styles.property}>{this.renderGender(post.get('gender'))}</div>
-            <div className={styles.property}>{this.renderAge(post.get('age'))}</div>
-            <div className={styles.property}>{this.renderLocation(post.get('location'))}</div>
-            <div className={styles.property}>
-              <i className='fas fa-paw'/>
-              {post.get('introduction')}
+      <div className={styles.post} key={postId}>
+        <Link className={styles.authorLink} to={`/users/${author.get('_id')}`}>
+          <header className={styles.header}>
+            <div className={styles.headerAvatar}>
+              <Avatar portrait={author.get('portrait')} size={40}/>
+            </div>
+            <div className={styles.headerName}>
+              {author.get('name')}
+            </div>
+            <div className={styles.headerTime}>
+              {relativizeTime(post.get('createdAt'))}
+            </div>
+          </header>
+        </Link>
+        <Link to={`/posts/${post.get('_id')}`}>
+          <Gallery post={post}/>
+          <div className={styles.information}>
+            <header className={styles.title}>{post.get('title')}</header>
+            <div className={styles.properties}>
+              <div className={styles.property}>{this.renderGender(post.get('gender'))}</div>
+              <div className={styles.property}>{this.renderAge(post.get('age'))}</div>
+              <div className={styles.property}>{this.renderLocation(post.get('location'))}</div>
+              <div className={styles.property}>
+                <i className='fas fa-paw'/>
+                {post.get('introduction')}
+              </div>
             </div>
           </div>
-        </div>
-      </Link>
+        </Link>
+      </div>
     );
   }
 

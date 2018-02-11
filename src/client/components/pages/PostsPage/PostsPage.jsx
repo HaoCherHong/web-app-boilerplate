@@ -4,25 +4,15 @@ import {connect} from 'react-redux';
 import {provideHooks} from 'redial';
 
 import PostList from '../../posts/PostList';
-import querystring from 'querystring';
 
 import {listPosts} from 'actions/posts';
 
+import getPageFromSearch from 'utils/getPageFromSearch';
+
 import styles from './PostsPage.css';
 
-function parsePageFromSearch(search) {
-  return parseInt(querystring.parse(search.slice(1)).p) || 1;
-}
-
-function getPaginationKey(search) {
-  const query = querystring.parse(search.slice(1));
-  delete query.p;
-  return querystring.stringify(query);
-}
-
-@connect((state, ownProps) => {
-  const paginationKey = getPaginationKey(ownProps.location.search);
-  const pagination = state.postsPagination.get(paginationKey);
+@connect((state) => {
+  const pagination = state.postsPagination.get('');
   return {
     pagination,
     posts: state.posts
@@ -30,27 +20,24 @@ function getPaginationKey(search) {
 })
 @provideHooks({
   fetch: ({dispatch, location: {search}}) => {
-    const currentPage = parsePageFromSearch(search);
-    return dispatch(listPosts(currentPage, true));
+    const currentPage = getPageFromSearch(search);
+    return dispatch(listPosts(currentPage, {getPageCount: true}));
   }
 })
 export default class PostsPage extends React.Component {
   static propTypes = {
+    location: PropTypes.object.isRequired,
     posts: PropTypes.object.isRequired,
-    pagination: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired
+    pagination: PropTypes.object
   }
 
   render() {
     const {posts, pagination, location: {search}} = this.props;
-    const currentPage = parsePageFromSearch(search);
+    const currentPage = getPageFromSearch(search);
 
     return (
-      <div>
+      <div className={styles.container}>
         <PostList posts={posts} pagination={pagination} currentPage={currentPage}/>
-        <footer className={styles.footer}>
-          PUPY © 2015
-        </footer>
       </div>
     );
   }

@@ -51,7 +51,7 @@ export default class PostPage extends React.Component {
   renderHeader(post) {
     const author = post.get('author');
     return (
-      <header className={styles.header}>
+      <Link className={styles.header} to={`/users/${author.get('_id')}`}>
         <div className={styles.headerAvatar}>
           <Avatar portrait={author.get('portrait')} size={40}/>
         </div>
@@ -61,7 +61,7 @@ export default class PostPage extends React.Component {
         <div className={styles.headerTime}>
           {relativizeTime(post.get('createdAt'))}
         </div>
-      </header>
+      </Link>
     );
   }
 

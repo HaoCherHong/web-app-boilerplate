@@ -1,0 +1,34 @@
+.user {
+  padding: 24px 15px;
+}
+
+.userHeader {
+  display: flex;
+}
+
+.userInformation {
+  display: flex;
+  align-items: baseline;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  margin-left: 15px;
+  height: 88px;
+}
+
+.userName {
+  color: #00aeeb;
+  font-size: 16px;
+}
+
+.postCount {
+  color: #ffffff;
+  display: inline-block;
+	border-radius: 8px;
+  background-color: #00aca8;
+  padding: 8px 10px;
+}
+
+.introduction {
+  padding-top: 15px;
+}
