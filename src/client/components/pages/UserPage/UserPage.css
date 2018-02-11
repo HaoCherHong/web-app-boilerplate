@@ -18,7 +18,7 @@
 
 .userName {
   color: #00aeeb;
-  font-size: 16px;
+  font-size: 36px;
 }
 
 .postCount {
@@ -30,5 +30,7 @@
 }
 
 .introduction {
+  color: #595757;
+  font-size: 16px;
   padding-top: 15px;
 }
