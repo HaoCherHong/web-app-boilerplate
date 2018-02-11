@@ -13,17 +13,17 @@ import styles from './PostList.css';
 
 export default class PostList extends React.Component {
   static propTypes = {
-    posts: PropTypes.object.isRequired,
-    pagination: PropTypes.object.isRequired,
-    currentPage: PropTypes.number.isRequired
+    currentPage: PropTypes.number.isRequired,
+    pagination: PropTypes.object,
+    posts: PropTypes.object.isRequired
   }
 
   render() {
-    const {posts, pagination, currentPage} = this.props;
+    const {pagination, currentPage} = this.props;
 
-    const pageCount = pagination.get('pages').count();
+    const pageCount = pagination ? pagination.get('pages').count() : 0;
 
-    if (!posts)
+    if (!pagination)
       return null;
 
     return (
