@@ -1,7 +1,8 @@
 .post {
-  display: block;
   background-color: #ffffff;
   border-bottom: 1px solid #dcdddd;
+  display: block;
+  position: relative;
 }
 
 .post:not(:first-child) {
@@ -72,6 +73,64 @@
   width: 15px;
   margin-right: 8px;
   text-align: center;
+}
+
+.adopted {
+  background: url(images/adopt_bg@2x.png) no-repeat;
+  background-size: 100% 100%;
+  color: white;
+  font-size: 12px;
+  line-height: 13px;
+  width: 50px;
+  height: 70px;
+  position: absolute;
+  top: 70px;
+  right: 15px;
+  text-align: center;
+  padding: 10px 5px 0 5px;
+}
+
+.follow {
+	position: absolute;
+	right: 16px;
+	width: 50px;
+	font-size: 10px;
+	color: #898989;
+  text-align: center;
+  transform: translateY(-25px);
+}
+
+.followButton {
+	margin-bottom: 4px;
+}
+
+.followButton {
+	background: #efefef url(images/unfollow_other@2x.png);
+	width: 50px;
+	height: 50px;
+	border: 0;
+	border-radius: 50%;
+	background-size: 100% !important;
+}
+
+.followButton.followed {
+	background: #00aca8 url(images/follow_other@2x.png);
+}
+
+.followButtonCat {
+	background: #efefef url(images/unfollow_cat@2x.png);
+}
+
+.followButtonDog {
+	background: #efefef url(images/unfollow_dog@2x.png);
+}
+
+.followButtonCat.followed {
+	background: #00aca8 url(images/follow_cat@2x.png);
+}
+
+.followButtonDog.followed {
+	background: #00aca8 url(images/follow_dog@2x.png);
 }
 
 .footer {

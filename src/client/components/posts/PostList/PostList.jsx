@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import classNames from 'classnames';
 
 import relativizeTime from 'utils/relativizeTime';
 import {getMonth, getYear} from 'utils/convertAge';
@@ -47,6 +48,7 @@ export default class PostList extends React.Component {
     const {posts} = this.props;
     const post = posts.get(postId);
     const author = post.get('author');
+    const kind = post.get('kind');
     return (
       <div className={styles.post} key={postId}>
         <Link className={styles.authorLink} to={`/users/${author.get('_id')}`}>
@@ -64,6 +66,17 @@ export default class PostList extends React.Component {
         </Link>
         <Link to={`/posts/${post.get('_id')}`}>
           <Gallery post={post}/>
+          {post.get('adopted') && <div className={styles.adopted}/>}
+          <div className={styles.follow}>
+            <button className={classNames(styles.followButton, {
+              [styles.followButtonCat]: kind === 'cat',
+              [styles.followButtonDog]: kind === 'dog',
+              [styles.followed]: post.get('followed')
+            })}/>
+            <span className='data-followers-count'>
+              {`${post.get('followersCount')}人追蹤`}
+            </span>
+          </div>
           <div className={styles.information}>
             <header className={styles.title}>{post.get('title')}</header>
             <div className={styles.properties}>

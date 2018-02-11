@@ -34,9 +34,10 @@ export default class PostPage extends React.Component {
 
     return (
       <div className={styles.container}>
-        <div>
+        <div className={styles.post}>
           {this.renderHeader(post)}
           <Gallery post={post}/>
+          {post.get('adopted') && <div className={styles.adopted}/>}
           <div className={styles.information}>
             {this.renderSmallProperties(post)}
             {this.renderProperty('自我介紹', post.get('introduction'), 'fas fa-paw')}
