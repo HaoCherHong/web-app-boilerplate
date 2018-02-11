@@ -10,6 +10,7 @@
       "es6": true
     },
     "rules": {
+      "comma-dangle": [2, "never"],
       "no-var": 2,
       "semi": [2, "always"],
       "indent": [2, 2, {
