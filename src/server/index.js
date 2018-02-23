@@ -35,8 +35,8 @@ if (process.env.NODE_ENV === 'development') {
   // TODO: SSR
 }
 
-server.listen(config.port, config.host, () => {
-  console.log('Server listening on %s:%d', config.host, config.port);
+server.listen(config.port, () => {
+  console.log('Server listening on %s:%d', config.port);
 });
 
 export default server;
