@@ -58,21 +58,46 @@
 
 .properties {
   display: flex;
-  justify-content: space-between;
   font-size: 14px;
-  flex-wrap: wrap;
   height: 60px;
-  flex-direction: column;
 }
 
-.property {
-  min-height: 18px;
-}
-
-.property i {
+.properties i {
   width: 15px;
   margin-right: 8px;
   text-align: center;
+}
+
+.propertiesLeft {
+  width: 38%;
+}
+
+.property {
+  height: 14px;
+}
+
+.property:not(:first-child) {
+  margin-top: 8px;
+}
+
+.propertiesRight {
+  width: 62%;
+  height: 100%;
+}
+
+.propertyIntroduction {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 20px;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.propertiesRight i {
+  display: block;
+  float: left;
+  height: 100%;
 }
 
 .adopted {

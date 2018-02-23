@@ -80,12 +80,16 @@ export default class PostList extends React.Component {
           <div className={styles.information}>
             <header className={styles.title}>{post.get('title')}</header>
             <div className={styles.properties}>
-              <div className={styles.property}>{this.renderGender(post.get('gender'))}</div>
-              <div className={styles.property}>{this.renderAge(post.get('age'))}</div>
-              <div className={styles.property}>{this.renderLocation(post.get('location'))}</div>
-              <div className={styles.property}>
+              <div className={styles.propertiesLeft}>
+                <div className={styles.property}>{this.renderGender(post.get('gender'))}</div>
+                <div className={styles.property}>{this.renderAge(post.get('age'))}</div>
+                <div className={styles.property}>{this.renderLocation(post.get('location'))}</div>
+              </div>
+              <div className={styles.propertiesRight}>
                 <i className='fas fa-paw'/>
-                {post.get('introduction')}
+                <div className={styles.propertyIntroduction}>
+                  {post.get('introduction')}
+                </div>
               </div>
             </div>
           </div>
