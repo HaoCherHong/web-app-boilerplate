@@ -1,3 +1,6 @@
+import React from 'react';
+import {Redirect} from 'react-router-dom';
+
 import App from './components/App';
 import PostsPage from './components/pages/PostsPage';
 import PostPage from './components/pages/PostPage';
@@ -8,6 +11,11 @@ export default [
   {
     component:  App,
     routes: [
+      {
+        path: '/',
+        exact: true,
+        component: () => React.createElement(Redirect, {to: '/posts'})
+      },
       {
         path: '/posts',
         component: PostsPage,

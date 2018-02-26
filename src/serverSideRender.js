@@ -28,6 +28,8 @@ export default async function serverSideRender(url) {
     })
   )));
 
+  // TODO: Handle redirect
+
   const context = {};
   const html = '<!DOCTYPE html>' + renderToString((
     <Provider store={store}>

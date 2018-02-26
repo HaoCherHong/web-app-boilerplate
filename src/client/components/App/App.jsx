@@ -27,7 +27,7 @@ export default class App extends React.Component {
 
   onRouteChanged() {
     const {history, location, dispatch, state} = this.props;
-    if (history.action === 'PUSH') {
+    if (history.action === 'PUSH') {  // This fucks up many things
       if (getHeaderExpandable(location))
         window.scrollTo(0, 290);
       else
