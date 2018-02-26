@@ -6,6 +6,7 @@ import PostsPage from './components/pages/PostsPage';
 import PostPage from './components/pages/PostPage';
 import CommentPage from './components/pages/CommentPage';
 import UserPage from './components/pages/UserPage';
+import SearchPage from './components/pages/SearchPage';
 
 export default [
   {
@@ -34,6 +35,11 @@ export default [
       {
         path: '/users/:userId',
         component: UserPage,
+        exact: true
+      },
+      {
+        path: '/search',
+        component: SearchPage,
         exact: true
       }
     ]

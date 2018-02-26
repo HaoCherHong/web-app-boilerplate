@@ -78,7 +78,7 @@ button:disabled {
 
 select {
   outline: none;
-  background: url(/images/select_arr@2x.png) no-repeat;
+  background: url(images/select_arr@2x.png) no-repeat;
   background-position: right 5px center;
   background-size: 17px 10px;
   border: #c9caca 1px solid;
