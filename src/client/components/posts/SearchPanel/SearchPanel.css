@@ -1,0 +1,55 @@
+.filterForm {
+    background: #ffffff;
+    padding: 15px 15px 20px 15px;
+}
+
+.searchForm {
+    background: #ffffff;
+    border-bottom: 1px solid #dcdddd;
+    margin-top: 2px;
+    padding: 15px 15px 20px 15px;
+}
+
+.title {
+    color: #f8b62d;
+    font-size: 18px;
+    margin: 0 0 14px 0;
+}
+
+.filterButton {
+    color: #ffffff;
+    font-size: 18px;
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #f7b52c;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.filter {
+    width: calc(50% - 5px);
+    margin-bottom: 11px;
+}
+
+.searchWrapper {
+    display: flex;
+    width: 100%;
+}
+
+.searchInput {
+    border-radius: 8px 0 0 8px;
+    flex: 1;
+}
+
+.searchButton {
+    background: #f7b52c;
+    border-radius: 0 8px 8px 0;
+    color: #ffffff;
+    font-size: 20px;
+    width: 52px;
+}
