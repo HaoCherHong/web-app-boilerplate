@@ -25,7 +25,7 @@ export default class SearchPanel extends React.Component {
     const {searchText, filter: {kind, gender, age, city, district, ligated}} = this.state;
 
     return (
-      <div>
+      <div className={styles.container}>
         <form name='filter' className={styles.filterForm} onSubmit={this.handleFormSubmit}>
           <h2 className={styles.title}>我要尋找</h2>
           <div className={styles.filters}>
