@@ -1,13 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {renderRoutes, matchRoutes} from "react-router-config";
+import {renderRoutes, matchRoutes} from 'react-router-config';
 import {trigger} from 'redial';
 
 import routes from 'routes';
 
 import Header from './Header';
+import SideMenu from './SideMenu';
 
 import styles from './App.css';
+
+import bindRef from 'utils/bindRef';
 
 const getHeaderExpandable = location => (
   /^\/posts\/?$/.test(location.pathname)
@@ -50,11 +53,16 @@ export default class App extends React.Component {
     const {route: {routes}} = this.props;
     return (
       <div>
-        <Header/>
+        <Header onSideMenuButtonClick={this.handleSideMenuButtonClick}/>
         <div className={styles.container}>
           {renderRoutes(routes)}
         </div>
+        <SideMenu ref={bindRef('sideMenu', this)}/>
       </div>
     );
+  }
+
+  handleSideMenuButtonClick = () => {
+    this.sideMenu.open();
   }
 }

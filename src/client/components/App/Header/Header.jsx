@@ -123,6 +123,7 @@ export default class Header extends React.Component {
   }
 
   renderTopRightButtons() {
+    const {onSideMenuButtonClick} = this.props;
     const {closeButton, collapsed} = this.state;
 
     return (
@@ -142,7 +143,7 @@ export default class Header extends React.Component {
                   <i className='fas fa-search'/>
                 </button>
               </Link>
-              <button className={styles.navigationButton}>
+              <button className={styles.navigationButton} onClick={onSideMenuButtonClick}>
                 <i className='fas fa-bars'/>
               </button>
             </div>
